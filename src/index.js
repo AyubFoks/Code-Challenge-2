@@ -4,10 +4,10 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Category colors mapping
     const categoryColors = {
-        'Cousins': '#FF5733',    // Orange-red
-        'Family': '#33FF57',     // Green
-        'Friend': '#3357FF',      // Blue
-        'Colleague': '#F033FF'    // Purple
+        'Cousins': '#ff5833a9',   // Orange-red
+        'Family': '#33ff58af',    // Green
+        'Friend': '#3358ffaf',     // Blue
+        'Colleague': '#f133ffaf'   // Purple
     };
     
     // Store guest data for editing

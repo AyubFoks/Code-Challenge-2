@@ -53,6 +53,7 @@ main {
     position: right;
     background-color: rgba(0, 0, 0, 0.5);
     display: grid;
+    padding-bottom: 50;
 }
 
 #logo {
@@ -244,6 +245,53 @@ button:hover {
     transform: scale(1.05);
 }
 
+.color-reference {
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 20px;
+}
+
+#refCousins {
+    background-color: #ff5833a9;
+    color: #ffffff;
+    padding: 5px;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 300;
+    font-size: 1rem;
+    margin: 2px;
+}
+#refFamily {
+    background-color: #33ff58af;
+    color: #ffffff;
+    padding: 5px;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 300;
+    font-size: 1rem;
+    margin: 2px;
+}
+
+#refFriend {
+    background-color: #3358ffaf;
+    color: #ffffff;
+    padding: 5px;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 300;
+    font-size: 1rem;
+    margin: 2px;
+}
+
+#refColleague {
+    background-color: #f133ffaf;
+    color: #ffffff;
+    padding: 5px;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 300;
+    font-size: 1rem;
+    margin: 2px;
+}
+
 #guestsList {
     height: 100vh;
     display: flex;
@@ -254,20 +302,25 @@ button:hover {
 }
 
 #guestsTable {
-    width: 80%;
-    border-collapse: collapse;
-    margin-top: 20px;
+    width: 82%;
+    margin: 0 auto;
+    background-color: rgba(0, 0, 0, 0.75);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    margin: 20px auto;
 }
 
 
 #guestsTable th {
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: #bc00d4;
     position: sticky;
     top: 0;
 }
 
 #guestsTable th, #guestsTable td {
     padding: 12px;
+    color: #ffffff;
     text-align: center;
     font-family: 'Outfit', sans-serif;
 }
@@ -285,7 +338,10 @@ button:hover {
 .edit-btn {
     background-color: rgba(0, 0, 0, 0.7);
     color: white;
-    padding: 5px 15px;
+    font-size: 1rem;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 400;
+    padding: 5px 10px;
     border: none;
     border-radius: 20px;
     cursor: pointer;
@@ -294,13 +350,17 @@ button:hover {
 }
 
 .edit-btn:hover {
-    background-color: #FFA500;
+    color: #ffffff;
+    background-color: #00eb5a;
     transform: scale(1.05);
 }
 
 .delete-btn {
     background-color: rgba(0, 0, 0, 0.7);
     color: white;
+    font-size: 1rem;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 400;
     padding: 5px 15px;
     border: none;
     border-radius: 20px;
@@ -309,6 +369,7 @@ button:hover {
 }
 
 .delete-btn:hover {
+    color: #ffffff;
     background-color: #ff0000;
     transform: scale(1.05);
 }
