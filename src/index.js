@@ -1,80 +1,106 @@
-const registrationForm = document.getElementById('registrationForm');
-const nameInput = document.getElementById('name');
-const rsvpInput = document.getElementById('rsvp');
-const categoryInput = document.getElementById('category');
-
-
-const timestampInput = document.getElementById('timestamp');
-const editButton = document.getElementById('edit-button');
-const deleteButton = document.getElementById('delete-button');
-
-const guestTableList = document.getElementById('guestsTableBody');
-
-let guestArray = [];
-
-let guestId = 1;
-
-formEntry.addEventListener('submit'), function(e){
-    e.preventDefault();
-
-const name = nameInput.value;
-const rsvp = rsvpInput.value;
-const category = categoryInput.value;
-    const timestamp = new Date().toLocaleString();
-
-    if (name && rsvp && category) {
-        const guest = {
-            id: guestId++,
-            name: name,
-            rsvp: rsvp,
-            category: category,
-            timestamp: timestamp
-        };
-
-        guestArray.push(guest);
-        displayGuests();
-        registrationForm.reset();
-    } else {
-        alert('Please fill in all fields.');
-    }
-
-}
-
-function displayGuests() {
-    guestTableList.innerHTML = '';
-    guestArray.forEach(guest => {
-        const row = document.createElement('tr');
-        row.innerHTML = `
-            <td>${guest.name}</td>
-            <td>${guest.rsvp}</td>
-            <td>${guest.category}</td>
-            <td>${guest.timestamp}</td>
-            <td>
-                <button class="edit-button" data-id="${guest.id}">Edit</button>
-                <button class="delete-button" data-id="${guest.id}">Delete</button>
-            </td>
-        `;
-        guestTableList.appendChild(row);
-    });
-}
-
-guestTableList.addEventListener('click', function(e) {
-    if (e.target.classList.contains('edit-button')) {
-        const id = e.target.getAttribute('data-id');
-        const guest = guestArray.find(g => g.id == id);
-        if (guest) {
-            nameInput.value = guest.name;
-            rsvpInput.value = guest.rsvp;
-            categoryInput.value = guest.category;
-            timestampInput.value = guest.timestamp;
-            editButton.setAttribute('data-id', id);
+document.addEventListener('DOMContentLoaded', function() {
+    const registrationForm = document.getElementById('registrationForm');
+    const guestsTableBody = document.getElementById('guestsTableBody');
+    
+    // Category colors mapping
+    const categoryColors = {
+        'Cousins': '#FF5733',    // Orange-red
+        'Family': '#33FF57',     // Green
+        'Friend': '#3357FF',      // Blue
+        'Colleague': '#F033FF'    // Purple
+    };
+    
+    // Store guest data for editing
+    let guestsData = [];
+    let currentlyEditing = null;
+    
+    registrationForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        const name = document.getElementById('name').value;
+        const category = document.getElementById('category').value;
+        const rsvp = document.getElementById('rsvp').checked;
+        const timeAdded = new Date().toLocaleTimeString();
+        
+        if (currentlyEditing !== null) {
+            // Update existing entry
+            guestsData[currentlyEditing] = { name, category, rsvp, timeAdded };
+            currentlyEditing = null;
+            document.querySelector('button[type="submit"]').textContent = 'Submit';
+        } else {
+            // Add new entry
+            guestsData.push({ name, category, rsvp, timeAdded });
         }
-    } else if (e.target.classList.contains('delete-button')) {
-        const id = e.target.getAttribute('data-id');
-        guestArray = guestArray.filter(g => g.id != id);
-        displayGuests();
+        
+        renderGuestsTable();
+        registrationForm.reset();
+    });
+    
+    function renderGuestsTable() {
+        guestsTableBody.innerHTML = '';
+        
+        guestsData.forEach((guest, index) => {
+            const newRow = document.createElement('tr');
+            newRow.style.backgroundColor = categoryColors[guest.category];
+            newRow.style.color = '#ffffff';
+            
+            newRow.innerHTML = `
+                <td>${guest.name}</td>
+                <td>${guest.rsvp ? '✓' : '✗'}</td>
+                <td>${guest.timeAdded}</td>
+                <td>
+                    <button class="edit-btn" data-index="${index}">Edit</button>
+                    <button class="delete-btn" data-index="${index}">Delete</button>
+                </td>
+            `;
+            
+            guestsTableBody.appendChild(newRow);
+        });
+        
+        // Add event listeners to all delete buttons
+        document.querySelectorAll('.delete-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const index = this.getAttribute('data-index');
+                guestsData.splice(index, 1);
+                renderGuestsTable();
+            });
+        });
+        
+        // Add event listeners to all edit buttons
+        document.querySelectorAll('.edit-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const index = this.getAttribute('data-index');
+                const guest = guestsData[index];
+                
+                // Fill the form with the guest's data
+                document.getElementById('name').value = guest.name;
+                document.getElementById('category').value = guest.category;
+                document.getElementById('rsvp').checked = guest.rsvp;
+                
+                // Scroll to the form
+                document.getElementById('register').scrollIntoView();
+                
+                // Change submit button text
+                document.querySelector('button[type="submit"]').textContent = 'Update';
+                
+                // Set currently editing index
+                currentlyEditing = index;
+            });
+        });
     }
-}
-); 
-
-console.log('Guest management system initialized.');
+    
+    // Toggle between sections
+    document.getElementById('registerBtn').addEventListener('click', function() {
+        document.getElementById('pitch').style.display = 'none';
+        document.getElementById('register').style.display = 'flex';
+        document.getElementById('guestsList').style.display = 'none';
+        currentlyEditing = null;
+        document.querySelector('button[type="submit"]').textContent = 'Submit';
+    });
+    
+    document.getElementById('guestsListBtn').addEventListener('click', function() {
+        document.getElementById('pitch').style.display = 'none';
+        document.getElementById('register').style.display = 'none';
+        document.getElementById('guestsList').style.display = 'block';
+    });
+});
