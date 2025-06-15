@@ -1,41 +1,50 @@
+    // Importing form entries and exporting guest list back to the HTML
 document.addEventListener('DOMContentLoaded', function() {
     const registrationForm = document.getElementById('registrationForm');
     const guestsTableBody = document.getElementById('guestsTableBody');
     
     // Category colors mapping
     const categoryColors = {
-        'Cousins': '#ff5833a9',   // Orange-red
-        'Family': '#33ff58af',    // Green
-        'Friend': '#3358ffaf',     // Blue
-        'Colleague': '#f133ffaf'   // Purple
+        'Cousins': '#ff5833a9',
+        'Family': '#33ff58af',
+        'Friend': '#3358ffaf', 
+        'Colleague': '#f133ffaf'
     };
     
-    // Store guest data for editing
+    // Creating an array to hold guest data
     let guestsData = [];
+
+    // add a variable to track currently editing guest
     let currentlyEditing = null;
     
+    // Initialize the guests table. Prevent execution until submission
     registrationForm.addEventListener('submit', function(event) {
         event.preventDefault();
         
+        // Form values
         const name = document.getElementById('name').value;
         const category = document.getElementById('category').value;
         const rsvp = document.getElementById('rsvp').checked;
         const timeAdded = new Date().toLocaleTimeString();
         
         if (currentlyEditing !== null) {
+
             // Update existing entry
             guestsData[currentlyEditing] = { name, category, rsvp, timeAdded };
             currentlyEditing = null;
             document.querySelector('button[type="submit"]').textContent = 'Submit';
         } else {
+
             // Add new entry
             guestsData.push({ name, category, rsvp, timeAdded });
         }
         
+        // Render the updated guests table
         renderGuestsTable();
         registrationForm.reset();
     });
     
+    // Function to render the guests table
     function renderGuestsTable() {
         guestsTableBody.innerHTML = '';
         
