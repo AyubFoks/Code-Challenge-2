@@ -97,19 +97,4 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     }
-    
-    // Toggle between sections
-    document.getElementById('registerBtn').addEventListener('click', function() {
-        document.getElementById('pitch').style.display = 'none';
-        document.getElementById('register').style.display = 'flex';
-        document.getElementById('guestsList').style.display = 'none';
-        currentlyEditing = null;
-        document.querySelector('button[type="submit"]').textContent = 'Submit';
-    });
-    
-    document.getElementById('guestsListBtn').addEventListener('click', function() {
-        document.getElementById('pitch').style.display = 'none';
-        document.getElementById('register').style.display = 'none';
-        document.getElementById('guestsList').style.display = 'block';
-    });
 });
