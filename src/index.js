@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const registrationForm = document.getElementById('registrationForm');
     const guestsTableBody = document.getElementById('guestsTableBody');
     
-    // Category colors mapping
+    // Category colors for the guests
     const categoryColors = {
         'Cousins': '#ff5833a9',
         'Family': '#33ff58af',
@@ -41,6 +41,8 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Render the updated guests table
         renderGuestsTable();
+
+        // Reset the registration form
         registrationForm.reset();
     });
     
@@ -97,4 +99,13 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     }
+    
+    // Toggle between sections
+    document.getElementById('registerBtn').addEventListener('click', function() {
+        document.getElementById('register').scrollIntoView({ behavior: 'smooth' });
+    });
+    
+    document.getElementById('guestsListBtn').addEventListener('click', function() {
+        document.getElementById('guestsList').scrollIntoView({ behavior: 'smooth' });
+    });
 });

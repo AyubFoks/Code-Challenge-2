@@ -1,3 +1,20 @@
+#logo {
+    position: relative;
+}
+
+#logo img {
+    transition: all 0.3s ease;
+}
+
+.desktop-logo {
+    display: block;
+}
+
+.mobile-logo {
+    display: none;
+}
+
+
 body {
     margin: 0;
     padding: 0; 
@@ -74,7 +91,6 @@ main {
 }
 
 #register {
-    height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -97,7 +113,7 @@ h2 {
     font-size: 4rem;
     color: #ffffff;
     text-align: center;
-    margin-top: 100px;
+    margin-top: 50px;
     margin-bottom: 10px;
 }
 
@@ -250,7 +266,7 @@ button:hover {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    margin: 20px;
+    margin: 4px;
 }
 
 #refCousins {
@@ -294,6 +310,7 @@ button:hover {
 
 #guestsList {
     height: 100vh;
+    margin-bottom: 50px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -315,11 +332,14 @@ button:hover {
 #guestsTable th {
     background-color: #bc00d4;
     position: sticky;
-    top: 0;
+    top: 0;padding: 12px;
+    color: #ffffff;
+    text-align: center;
+    font-family: 'Outfit', sans-serif;
 }
 
-#guestsTable th, #guestsTable td {
-    padding: 12px;
+#guestsTable td {
+    padding: 4px;
     color: #ffffff;
     text-align: center;
     font-family: 'Outfit', sans-serif;
@@ -395,4 +415,121 @@ button:hover {
 .delete-btn:hover {
     background-color: #ff0000;
     transform: scale(1.05);
+}
+
+/* Responsiveness */
+ /* Tablet styles */
+@media screen and (max-width: 1024px) {
+    body {
+        flex-direction: column;
+    }
+
+    header {
+        width: 100vw;
+        height: auto;
+        position: relative;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 20px;
+    }
+
+     .desktop-logo {
+        display: none;
+    }
+    
+    .mobile-logo {
+        display: block;
+        width: 30%; 
+        height: auto;
+    }
+
+    header p {
+        margin-top: 0;
+        margin-left: 20px;
+        margin-right: 20px;
+        text-align: center;
+    }
+
+    .social-icons {
+        flex-direction: row;
+        margin-top: 0;
+    }
+
+    main {
+        margin-left: 0;
+        width: 100vw;
+    }
+
+    #pitch {
+        height: auto;
+        padding: 50px 20px;
+    }
+
+    h1 {
+        font-size: 4em;
+    }
+}
+
+/* Bigger Mobile styles */
+@media screen and (max-width: 768px) {
+    h1 {
+        font-size: 3em;
+    }
+
+    h2 {
+        font-size: 3rem;
+    }
+
+    #formFields {
+        flex-direction: column;
+    }
+
+    #formContainer {
+        width: 100%;
+    }
+
+    #cta {
+        flex-direction: column;
+    }
+
+    .color-reference {
+        flex-wrap: wrap;
+    }
+
+    #guestsTable {
+        width: 95%;
+        font-size: 0.9em;
+    }
+
+    #guestsTable th, 
+    #guestsTable td {
+        padding: 8px 4px;
+    }
+}
+
+/* Small mobile device styles */
+@media screen and (max-width: 480px) {
+    header {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    header p {
+        width: 100%;
+        margin: 10px 0;
+    }
+
+    h1 {
+        font-size: 2.5em;
+    }
+
+    h2 {
+        font-size: 2.5rem;
+    }
+
+    #guestsTable {
+        display: block;
+        overflow-x: auto;
+    }
 }
